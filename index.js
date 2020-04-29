@@ -1,34 +1,47 @@
-// console.log(data.js);
 const moviesContainer = document.querySelector('.movies-container');
 
+function saveToWatchList(imdbID) {
+  const movie = movieData.find(function (currentMovie) {
+    return currentMovie.imdbID == imdbID;
+});
+  let watchlistJSON = localStorage.getItem('watchlist');
+  let watchlist = JSON.parse(watchlistJSON);
+  if (watchlist == null) {
+    watchlist = [];
+  }
+  watchlist.push(movie);
+  watchlistJSON = JSON.stringify(watchlist);
+  localStorage.setItem('watchlist', watchlistJSON);
 
-document.addEventListener("DOMContentLoaded", function () {
+}
+  document.addEventListener("DOMContentLoaded", function () {
     function renderMovies(movieArray) {
-        const moviesHtmlArray = movieArray.map(movie => {
-            return `<div class="movie">
+      const moviesHtmlArray = movieArray.map(movie => {
+        return `<div class="movie">
             <div class="card" style="width: 18rem;">
               <img src="${movie.Poster}" class="movie-poster" alt="...">
               <div class="card-body">
                 <h5 class="movie-title">${movie.Title}</h5>
                 <p class="release-date">${movie.Year}</p>
-                <a href="#" class="btn btn-primary">Add</a>
+                <button onclick="saveToWatchList('${movie.imdbID}')">Add to Watchlist</button>
               </div>
             </div>
           </div>`
 
-        })
-        return moviesHtmlArray.join('');
+      })
+      return moviesHtmlArray.join('');
 
 
 
 
     }
     
-    moviesContainer.innerHTML = renderMovies(movieData);
     
-    const myForm = document.getElementById('myForm');
+    const myForm = document.getElementById('search-form');
     myForm.addEventListener('submit', function (e) {
-        // event listener code goes here
+      e.preventDefault();
+      // event listener code goes here
+      moviesContainer.innerHTML = renderMovies(movieData);
     })
-    // code here will execute after the document is loaded
-});
+
+  })
