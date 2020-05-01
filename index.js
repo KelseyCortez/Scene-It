@@ -3,7 +3,7 @@ const moviesContainer = document.querySelector('.movies-container');
 function saveToWatchList(imdbID) {
   const movie = movieData.find(function (currentMovie) {
     return currentMovie.imdbID == imdbID;
-});
+  });
   let watchlistJSON = localStorage.getItem('watchlist');
   let watchlist = JSON.parse(watchlistJSON);
   if (watchlist == null) {
@@ -14,10 +14,10 @@ function saveToWatchList(imdbID) {
   localStorage.setItem('watchlist', watchlistJSON);
 
 }
-  document.addEventListener("DOMContentLoaded", function () {
-    function renderMovies(movieArray) {
-      const moviesHtmlArray = movieArray.map(movie => {
-        return `<div class="movie">
+document.addEventListener("DOMContentLoaded", function () {
+  function renderMovies(movieArray) {
+    const moviesHtmlArray = movieArray.map(movie => {
+      return `<div class="movie">
             <div class="card" style="width: 18rem;">
               <img src="${movie.Poster}" class="movie-poster" alt="...">
               <div class="card-body">
@@ -28,20 +28,21 @@ function saveToWatchList(imdbID) {
             </div>
           </div>`
 
-      })
-      return moviesHtmlArray.join('');
-
-
-
-
-    }
-    
-    
-    const myForm = document.getElementById('search-form');
-    myForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      // event listener code goes here
-      moviesContainer.innerHTML = renderMovies(movieData);
     })
+    return moviesHtmlArray.join('');
 
+
+
+
+  }
+
+
+  const myForm = document.getElementById('search-form');
+  myForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const searchString = document.getElementById(‘search-bar’).value;
+
+    moviesContainer.innerHTML = renderMovies(movieData);
   })
+
+})
