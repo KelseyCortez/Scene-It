@@ -1,7 +1,7 @@
 const moviesContainer = document.querySelector('.movies-container');
-
+let movieDataArray
 function saveToWatchList(imdbID) {
-  const movie = movieData.find(function (currentMovie) {
+  const movie = movieDataArray.find(function (currentMovie) {
     return currentMovie.imdbID == imdbID;
   });
   let watchlistJSON = localStorage.getItem('watchlist');
@@ -40,9 +40,17 @@ document.addEventListener("DOMContentLoaded", function () {
   const myForm = document.getElementById('search-form');
   myForm.addEventListener('submit', function (e) {
     e.preventDefault();
-    const searchString = document.getElementById(‘search-bar’).value;
+    let searchString = document.getElementsByClassName('search-bar')[0].value;
+    console.log(searchString);
+    const urlEncodedSearchString = encodeURIComponent(searchString);
+    axios.get("http://www.omdbapi.com/?apikey=199ebac6&s=" + urlEncodedSearchString)
+      .then(response => {
+        movieDataArray = response.data.Search;
+        console.log(movieDataArray);
+        moviesContainer.innerHTML = renderMovies(movieDataArray);
+      
+      })
 
-    moviesContainer.innerHTML = renderMovies(movieData);
   })
 
 })

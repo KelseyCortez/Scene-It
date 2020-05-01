@@ -1,13 +1,10 @@
-const url = `http://www.omdbapi.com/?i=tt3896198&apikey=199ebac6`;
-$.get(url);
-
 document.addEventListener("DOMContentLoaded", function () {
     const moviesContainer = document.querySelector('.movies-container');
     const savedMovies = localStorage.getItem('watchlist');
     let watchlist = JSON.parse(savedMovies);
-    function renderMovies(url) {
-        console.log(url);
-        const moviesHtmlArray = url.map(movie => {
+    function renderMovies(movieArray) {
+        // console.log(movieArray);
+        const moviesHtmlArray = movieArray.map(movie => {
             return `<div class="movie">
             <div class="card" style="width: 18rem;">
               <img src="${movie.Poster}" class="movie-poster" alt="...">

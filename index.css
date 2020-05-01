@@ -1,7 +1,12 @@
 body {
 	background-color: #B2E9FD;
 }
+.search-bar {
+	display: flex;
+	align-items: center;
+	width: 85%;
 
+}
 .movies-container {
 	margin-top: 20px;
 	padding: 15px;
