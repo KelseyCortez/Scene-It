@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const moviesHtmlArray = movieArray.map(movie => {
       return `<div class="movie">
             <div class="card" style="width: 18rem;">
-              <img src="${movie.Poster}" class="movie-poster" alt="...">
+              <img src="${movie.Poster}" class="movie-poster" alt= img src="no_image.png">
               <div class="card-body">
                 <h5 class="movie-title">${movie.Title}</h5>
                 <p class="release-date">${movie.Year}</p>
