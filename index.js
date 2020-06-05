@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let searchString = document.getElementsByClassName('search-bar')[0].value;
     console.log(searchString);
     const urlEncodedSearchString = encodeURIComponent(searchString);
-    axios.get("http://www.omdbapi.com/?apikey=199ebac6&s=" + urlEncodedSearchString)
+    axios.get("https://www.omdbapi.com/?apikey=199ebac6&s=" + urlEncodedSearchString)
       .then(response => {
         movieDataArray = response.data.Search;
         console.log(movieDataArray);
